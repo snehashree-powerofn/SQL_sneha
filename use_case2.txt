@@ -1,0 +1,101 @@
+create table student( 
+id varchar(4),  
+name varchar(20), 
+department varchar(30),
+cgpa float, 
+primary key(id)
+);
+
+insert into student values('S001','Arun','CS',8);
+insert into student values('S002','Gita','CS',7.5);
+insert into student values('S003','Kumar','IT',6);
+insert into student values('S004','Rohit','IT',8.5);
+insert into student values('S005','Yamuna','ECE',9);
+insert into student values('S006','Yogesh','ECE',9);
+
+
+create table company( 
+id varchar(4),  
+name varchar(20), 
+location varchar(30),
+date date, 
+primary key(id)
+);
+
+
+insert into company values('C001','Microsoft','Bangalore','2020-08-01');
+insert into company values('C002','Amazon','Chennai','2020-09-01');
+insert into company values('C003','Flipkart','Bangalore','2020-09-15');
+insert into company values('C004','Honeywell','Hyderabad','2020-10-30');
+insert into company values('C005','Accenture','Chennai','2020-11-30');
+insert into company values('C006','Wipro','Noida','2020-12-31');
+
+
+create table placements( 
+s_id varchar(4),  
+c_id varchar(4), 
+package bigint
+);
+
+
+insert into placements values('S001','C001',2000000);
+insert into placements values('S002','C001',2000000);
+insert into placements values('S003','C002',1200000);
+insert into placements values('S004','C004',700000);
+insert into placements values('S004','C006',400000);
+insert into placements values('S006','C004',700000);
+
+
+
+
+
+
+1.
+
+select student.name as Student,company.name as Company,package from student
+join company
+join placements 
+on student.id=placements.s_id AND company.id = placements.c_id where package = (select max(package) from placements);
+
+
+2.
+
+
+
+
+3.
+
+SELECT company.name, count(company.name)  FROM company
+INNER JOIN placements ON  company.id=placements.c_id GROUP BY company.name;
+
+
+4.
+
+select monthname(interview_date) as Month ,name as Company from company 
+where monthname(interview_date)='September';
+
+
+5.
+
+
+
+
+6.
+
+
+
+7.
+
+
+8.
+
+select name,location from company 
+where location like 'B%';
+
+
+
+
+
+
+
+

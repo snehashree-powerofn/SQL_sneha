@@ -1,0 +1,127 @@
+sudo mysql -u root
+
+drop table agent;
+drop table customer;
+
+
+1.
+
+create table customer( 
+cust_code varchar(20),  
+cust_name varchar(20), 
+cust_city varchar(30),
+phone_no varchar(20), 
+agent_code varchar(20), 
+primary key(cust_code),
+foreign key (agent_code) references agent (agent_code)
+);
+
+
+
+insert into customer values('C001','Albert','Chennai',9798865876,'A001');
+insert into customer values('C002','Ravi','Bangalore',9876123456,'A002');
+insert into customer values('C003','Archana','Chennai',94523098123,'A003');
+insert into customer values('C004','Riya','Trichy',9612309876,'A004');
+insert into customer values('C005','Pavithra','Kanyakumari',9612309856,'A005');
+
+
+create table agent( 
+agent_code varchar(20),  
+agent_name varchar(20), 
+country varchar(30), 
+phone_no varchar(20), 
+status tinyint not null check(status in(0,1)),
+primary key(agent_code)
+);
+
+
+insert into agent values('A001','Joe','Cannada',2345623452,0);
+insert into agent values('A002','Sara','India',1234567890,1);
+insert into agent values('A003','Wiley','Bahamas',987654321,1);
+insert into agent values('A004','Katniss','Ireland',3456543698,1);
+insert into agent values('A005','Arjun','India',9844342345,0);
+
+
+
+constraint fk_type foreign key(agent_code) references agent(agent_code)
+foreign key(agent_code) references customers(agent_code)
+
+
+drop table orders;
+
+create table orders(
+order_num varchar(20),  
+cust_code varchar(20), 
+agent_code varchar(20), 
+amount int,
+order_date date,
+primary key(order_num),
+foreign key (cust_code) references customer(cust_code),
+foreign key (agent_code) references agent (agent_code)
+);
+
+
+insert into orders values('O001','C001','A001',50000,'2021-02-12');
+insert into orders values('O002','C002','A002',3000,'2021-03-26');
+insert into orders values('O003','C003','A003',25000,'2021-02-21');
+insert into orders values('O004','C004','A004',6000,'2021-03-06');
+insert into orders values('O005','C005','A005',100000,'2019-09-13');
+
+select * from agent;
+select * from orders;
+select * from customer;
+
+2.
+
+alter table agent 
+add commission float;
+
+update agent set commission=0.2 where agent_code='A001';
+update agent set commission=0.96 where agent_code='A002';
+update agent set commission=0.23 where agent_code='A003';
+update agent set commission=0.12 where agent_code='A004';
+update agent set commission=0.76 where agent_code='A005';
+
+
+3.
+
+alter table agent
+drop column phone_no;
+
+4.
+
+alter table agent
+change column commission commission_percentage float;
+
+5.
+
+create table agent_details as select * from agent;
+drop table agent;
+
+6.
+
+truncate table orders;
+
+7.
+
+alter table orders 
+alter amount set default 0;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
