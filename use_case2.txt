@@ -77,6 +77,9 @@ where monthname(interview_date)='September';
 
 5.
 
+select name as Company, interview_date as Date from company
+where interview_date<current_timestamp;
+
 
 
 
