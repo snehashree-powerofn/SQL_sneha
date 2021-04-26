@@ -102,10 +102,7 @@ where s_id = (select s_id from placements group by s_id order by count(s_id) des
 
 7.
 
-select student.name as Student,student.department as Department,student.cgpa as CGPA from student
-join company
-join placements 
-where student.id not in (select s_id from placements) and cgpa>7 limit 1;
+select student.name as Student,student.department as Department,student.cgpa as CGPA from student where student.id not in (select s_id from placements) and student.cgpa>7;
 
 
 8.
