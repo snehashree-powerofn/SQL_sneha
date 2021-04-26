@@ -26,8 +26,6 @@ select Device,Consumption from Details where Consumption=(select max(Consumption
 
 
 
-with MYTABLE as ( select TIME as minn,row_number() over (partition by HOUR(TIME) order by TIME)-MINUTE(TIME) as rowdif from USECASE_3 where DEVICE='D2') select timestampadd(MINUTE,rowdif-1,minn) from MYTABLE where rowdif!=1;
-
 
 
 
