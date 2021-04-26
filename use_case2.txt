@@ -59,8 +59,12 @@ on student.id=placements.s_id AND company.id = placements.c_id where package = (
 
 
 2.
-
-
+select student.name as Student,student.department as Department,(case when student.id in
+(select s_id from placements)then 'YES' else 'NO' end) as Placed,company.name as Company,package from student
+join company
+join placements 
+on student.id=placements.s_id AND company.id = placements.c_id
+where department='ECE' limit 2;
 
 
 3.
