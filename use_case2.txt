@@ -85,9 +85,22 @@ where interview_date<current_timestamp;
 
 6.
 
+select student.name as Student,company.name as Company
+from student 
+join company 
+join placements 
+on student.id=placements.s_id and company.id = placements.c_id  
+where s_id = (select s_id from placements group by s_id order by count(s_id) desc limit 1);
+
+
 
 
 7.
+
+select student.name as Student,student.department as Department,student.cgpa as CGPA from student
+join company
+join placements 
+where student.id not in (select s_id from placements) and cgpa>7 limit 1;
 
 
 8.
