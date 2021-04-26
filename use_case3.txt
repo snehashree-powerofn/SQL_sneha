@@ -13,7 +13,8 @@ select Time , Device ,Count(Time) from Details group by Device,Time having count
 
 4.Ans :
 
-select Device,hour(Time),sum(Consumption) from Details group by hour(Time),Device;
+select Device,Hour(Time) as Hour,sum(Consumption) as Cumulative_consumption from Details group by hour(Time),Device;
+
 
 
 5.Ans:
